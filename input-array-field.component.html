@@ -1,0 +1,38 @@
+<div [formArray]="formArray" class="input-array-container">
+  <div *ngFor="let item of items; let i = index" class="input-array-item">
+    <mat-form-field appearance="outline" class="input-array-field">
+      <mat-label>{{ placeholderText }} {{ i + 1 }}</mat-label>
+      <input
+        matInput
+        type="text"
+        [formControlName]="i"
+        (blur)="handleBlur()"
+        [disabled]="isDisabled"
+      />
+      </mat-form-field>
+
+    <button
+      mat-icon-button
+      color="warn"
+      type="button"
+      (click)="removeItem(i)"
+      [disabled]="isDisabled || (items.length <= initialItemCount && initialItemCount > 0 && items.length <=1)"
+      aria-label="Remove item"
+      class="remove-item-btn"
+    >
+      <mat-icon>remove_circle_outline</mat-icon>
+    </button>
+  </div>
+
+  <button
+    mat-stroked-button
+    color="primary"
+    type="button"
+    (click)="addItem()"
+    [disabled]="isDisabled"
+    class="add-item-btn"
+  >
+    <mat-icon>add_circle_outline</mat-icon>
+    Add {{ placeholderText }}
+  </button>
+</div>
